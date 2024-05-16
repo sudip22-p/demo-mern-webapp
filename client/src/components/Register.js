@@ -20,16 +20,16 @@ function Register() {
       if(form.password.length<6){
       toast.error('Password must be atleast 6 character long')
     }
-      else if(form.password!=form.confirmPassword){
+      else if(form.password!==form.confirmPassword){
         toast.error('Passwords donot match')
       }
       else{
-        await axios.post('http://localhost:3000/register',{
+        await axios.post('http://localhost:2000/register',{
           form
         }).then(res=>{
-          if(res.data=='exist'){
+          if(res.data==='exist'){
             toast.error("Email Already Exists")
-          }else if(res.data=='success'){
+          }else if(res.data==='success'){
             toast.success("User Registration Successful")
           }else{
             toast.error('Something Went Wrong')

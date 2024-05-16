@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const personSchema = new mongoose.Schema({
-  name: String, // String is shorthand for {type: String}
+  fullName: String, // String is shorthand for {type: String}
   email: String,
   password: String,
 });

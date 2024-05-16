@@ -44,7 +44,7 @@ app.post('/register', async (req, res) => {
     // Check if user already exists
     const existingUser = await Person.findOne({ email: data.email });
     if (existingUser) {
-       res.send('exist');
+       return res.send('exist');
     }
 
     // Hash the password
@@ -52,15 +52,17 @@ app.post('/register', async (req, res) => {
     data.password = hashedPassword;
 
     // Insert the user data into the database
+    // console.log(data);
+    
     const newUser = new Person(data);
     await newUser.save();
 
     // Send success response if registration is successful
-    res.send('success');
+    return res.send('success');
   } catch (e) {
     // Send failure response if any error occurs
     console.error(e);
-    res.send('fail');
+    return res.send('fail');
   }
 });
 
