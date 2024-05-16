@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 // import './App.css';
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -15,6 +17,7 @@ import Register from './components/Register';
 function App() {
   return (
     <div className="App">
+        <ToastContainer />
         <Router>
           {/* //always there */}
           <Navbar/>
