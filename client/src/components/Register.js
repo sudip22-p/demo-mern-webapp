@@ -16,6 +16,22 @@ function Register() {
   })
   const submit= async(e)=>{
     e.preventDefault()
+    try{//input verification 
+      if(form.password.length<6){
+      toast.error('Password must be atleast 6 character long')
+    }
+      else if(form.password!=form.confirmPassword){
+        toast.error('Passwords donot match')
+      }
+      else{
+        await axios.post('http://localhost:3000/register',{
+          form
+        })
+      }
+    }catch(e){
+      console.log(e);
+      
+    }
   }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
