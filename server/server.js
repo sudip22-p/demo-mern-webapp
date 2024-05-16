@@ -16,6 +16,22 @@ app.get('/',cors(), (req, res) => {
   
   res.send('Hello SUDIP!');
 });
+app.post('/register',async(req,res)=>{
+  const form=req.body.form
+  const data={
+    fullName:form.fullName,
+    email:form.email,
+    password:form.password
+  }
+  try{
+    //check if user already exist --if yes>res.send('exists');
+    // if user not exist && data insert successs then >res.send('success');
+    
+  }catch(e){
+    // if overall process failed then >
+    res.send('fail');
+  }
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
