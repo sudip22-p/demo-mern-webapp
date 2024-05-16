@@ -11,3 +11,4 @@ const conn= mongoose.connect(dbURI)
   .catch((err) => {
     console.log("Error occurred:", err);
   });
+  export default conn;
