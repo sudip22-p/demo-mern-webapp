@@ -6,4 +6,4 @@ const personSchema = new mongoose.Schema({
   password: String,
 });
 //conversion of schema to model
-export const Person = mongoose.model('Person', personSchema);
+export const Person = mongoose.model('Person', personSchema,'users');//create collection on db as -users

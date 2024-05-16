@@ -26,6 +26,14 @@ function Register() {
       else{
         await axios.post('http://localhost:3000/register',{
           form
+        }).then(res=>{
+          if(res.data=='exist'){
+            toast.error("Email Already Exists")
+          }else if(res.data=='success'){
+            toast.success("User Registration Successful")
+          }else{
+            toast.error('Something Went Wrong')
+          }
         })
       }
     }catch(e){
