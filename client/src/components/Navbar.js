@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from "react-router-dom"
+import cookies from "js-cookie"
 // useState
+// useEffect
+
 function Navbar() {
     // //for showing and hiding the navbar--responsiveness
     // const [showMenu, setShowMenu] = useState(false)
@@ -8,6 +11,14 @@ function Navbar() {
     // const toggleMenu = () => {
     //     setShowMenu(!showMenu)//sets true if false and vice versa
     // }
+    const [cookieVal,setCookieVal]=useState(cookies.get('email'))
+  const logout=()=>{
+    //clear the cookie
+    if(cookieVal!==undefined){
+        setCookieVal(undefined)
+        cookies.remove("email");
+    }
+  }
     return (
         <header>
             <nav className='bg-slate-200 text-black-600 flex justify-between px-7 py-5'>
@@ -28,9 +39,16 @@ function Navbar() {
                         <li className='mx-7 hover:text-blue-500 cursor-pointer'>Contact Us</li>
                     </Link>
                 </ul>
-                <Link to={"/login"}>
-                    <button className="login font-bold bg-white py-2 px-5 rounded text-blue-500 hover:bg-blue-500 hover:text-white border-2 border-blue-500 cursor-pointer">LOGIN</button>
-                </Link>
+                {
+                    cookieVal===undefined && 
+                    <Link to={"/login"}>
+                        <button className="login font-bold bg-white py-2 px-5 rounded text-blue-500 hover:bg-blue-500 hover:text-white border-2 border-blue-500 cursor-pointer">LOGIN</button>
+                    </Link>
+                }
+                {
+                    cookieVal!==undefined && 
+                        <button className="login font-bold bg-white py-2 px-5 rounded text-blue-500 hover:bg-blue-500 hover:text-white border-2 border-blue-500 cursor-pointer" onClick={()=>{logout()}}>LOGOUT</button>
+                }
             </nav>
         </header>
     )

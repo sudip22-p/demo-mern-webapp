@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {Link, useNavigate} from "react-router-dom"
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
+import cookies from "js-cookie"
 // useState
 
 function Register() {
@@ -24,17 +25,23 @@ function Register() {
         toast.error('Passwords donot match')
       }
       else{
-        await axios.post('http://localhost:2000/register',{
-          form
-        }).then(res=>{
-          if(res.data==='exist'){
-            toast.error("Email Already Exists")
-          }else if(res.data==='success'){
-            toast.success("User Registration Successful")
-          }else{
+        try{
+
+          await axios.post('http://localhost:2000/register',{
+            form
+          }).then(res=>{
+            if(res.data==='exist'){
+              toast.error("Email Already Exists")
+            }else if(res.data==='success'){
+              cookies.set("email",form.email,{expires:7})
+              toast.success("User Registration Successful")
+            }else{
             toast.error('Something Went Wrong')
           }
         })
+      }catch(e){
+          toast.error('Something Went Wrong')
+        }
       }
     }catch(e){
       console.log(e);

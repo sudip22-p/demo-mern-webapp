@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {Link, useNavigate} from "react-router-dom"
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify'
+import cookies from "js-cookie"
 // useState
 
 function Login() {
@@ -19,20 +20,26 @@ function Login() {
       toast.error('Password must be atleast 6 character long')
     }
       else{
-        await axios.post('http://localhost:2000/login',{
-          form
-        }).then(res=>{
-          if(res.data==='noExist'){
-            toast.error("User Not Exists")
-          }
-          else if(res.data==='invalidPassword'){
-            toast.error("Incorrect Password")
-          }else if(res.data==='success'){
-            toast.success("User Login Successful")
-          }else{
+        try{
+
+          await axios.post('http://localhost:2000/login',{
+            form
+          }).then(res=>{
+            if(res.data==='noExist'){
+              toast.error("User Not Exists")
+            }
+            else if(res.data==='invalidPassword'){
+              toast.error("Incorrect Password")
+            }else if(res.data==='success'){
+              cookies.set("email",form.email,{expires:7})//creating cookie--expire is optional--7 represent 7 days
+              toast.success("User Login Successful")
+            }else{
+              toast.error('Something Went Wrong')
+            }
+          })
+        }catch(e){
             toast.error('Something Went Wrong')
-          }
-        })
+        }
       }
     }catch(e){
       console.log(e);
