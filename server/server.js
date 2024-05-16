@@ -65,6 +65,38 @@ app.post('/register', async (req, res) => {
     return res.send('fail');
   }
 });
+// Login route handler
+app.post('/login', async (req, res) => {
+  // Extract form data from request body
+  const form = req.body.form;
+
+  // Create data object with required fields
+  const data = {
+    email: form.email,
+    password: form.password
+  };
+
+  try {
+    // Check if user already exists
+    const existingUser = await Person.findOne({ email: data.email });
+    if (!existingUser) {
+       return res.send('noExist');
+    }
+
+    // Compare the provided password with the hashed password stored in the database
+    const passwordMatch = await bcrypt.compare(data.password, existingUser.password);
+    if (!passwordMatch) {
+      return res.send('invalidPassword'); // Send response if passwords do not match
+    }
+    
+    // Send success response if password match
+    return res.send('success');
+  } catch (e) {
+    // Send failure response if any error occurs
+    console.error(e);
+    return res.send('fail');
+  }
+});
 
 // Start the server and listen on the specified port
 app.listen(port, () => {
