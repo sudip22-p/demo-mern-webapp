@@ -14,7 +14,7 @@ function Home() {
                 </div>
                 <p className="text-black font-normal mt-3 mb-1">Login to continue,</p>
                 <Link to={"/login"}>
-                    <button className="inline-flex text-white bg-indigo-500 border-0 py-1 px-4 focus:outline-none hover:bg-indigo-600 rounded cursor-pointer">LOGIN</button>
+                    <button className="inline-flex text-blue-500 bg-white border-blue-500 border-2 py-2 px-5 focus:outline-none hover:bg-blue-500 hover:text-white rounded cursor-pointer">LOGIN</button>
                 </Link>
             </section>
     )
