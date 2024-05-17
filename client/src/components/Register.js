@@ -79,14 +79,14 @@ function Register() {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="confirmPassword" className="block text-gray-700">Confirm Password:</label>
+          <label htmlFor="confirmPassword" className="block text-gray-700">Confirm Your Password:</label>
           <input type="password" id="confirmPassword" name="confirmPassword" className="mt-1 px-4 py-2 border border-gray-300 rounded-md w-full" required value={form.confirmPassword} onChange={(e) => { setForm({ ...form, [e.target.name]: e.target.value }) }} />
         </div>
 
         <input type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors cursor-pointer" value={"Register"} />
       </form>
 
-      <p className="mt-4">Already have an account? <Link to={"/login"}><span className="text-blue-500 hover:underline">Login</span></Link></p>
+      <p className="mt-4">Already have an account? <Link to={"/login"}><span className="text-blue-500 hover:underline">Login Now</span></Link></p>
     </div>
   )
 }
