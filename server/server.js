@@ -29,7 +29,7 @@ app.get('/', cors(), (req, res) => {
   res.send('Hello SUDIP!');
 });
 //handling the email sending route
-app.post('/mail',sendMail)//sendMail is a controller
+app.post('/mail', sendMail)//sendMail is a controller
 
 // Registration route handler
 app.post('/register', async (req, res) => {
@@ -47,7 +47,7 @@ app.post('/register', async (req, res) => {
     // Check if user already exists
     const existingUser = await Person.findOne({ email: data.email });
     if (existingUser) {
-       return res.send('exist');
+      return res.send('exist');
     }
 
     // Hash the password
@@ -56,7 +56,7 @@ app.post('/register', async (req, res) => {
 
     // Insert the user data into the database
     // console.log(data);
-    
+
     const newUser = new Person(data);
     await newUser.save();
 
@@ -83,7 +83,7 @@ app.post('/login', async (req, res) => {
     // Check if user already exists
     const existingUser = await Person.findOne({ email: data.email });
     if (!existingUser) {
-       return res.send('noExist');
+      return res.send('noExist');
     }
 
     // Compare the provided password with the hashed password stored in the database
@@ -91,7 +91,7 @@ app.post('/login', async (req, res) => {
     if (!passwordMatch) {
       return res.send('invalidPassword'); // Send response if passwords do not match
     }
-    
+
     // Send success response if password match
     return res.send('success');
   } catch (e) {
@@ -108,9 +108,9 @@ app.post('/account', async (req, res) => {
     // Check if user already exists
     const existingUser = await Person.findOne({ email: userEmail });
     if (!existingUser) {
-       return res.send('error');
+      return res.send('error');
     }
-    
+
     // Send success response if password match
     return res.send(existingUser.fullName);
   } catch (e) {

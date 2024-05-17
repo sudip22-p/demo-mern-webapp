@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 const sendMail = async (req, res) => {
     const data = req.body.emailData;
-    
+
     // Create data object with required fields
     const emailData = {
         to: data.to,
@@ -22,10 +22,10 @@ const sendMail = async (req, res) => {
 
         // Set up email data
         let mailOptions = {
-            from: process.env.EMAIL_USERNAME, 
+            from: process.env.EMAIL_USERNAME,
             to: emailData.to,
-            subject: emailData.subject, 
-            text: emailData.text 
+            subject: emailData.subject,
+            text: emailData.text
         };
 
         // Send email
