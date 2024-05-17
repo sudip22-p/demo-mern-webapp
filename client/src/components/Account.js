@@ -1,14 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cookies from 'js-cookie'
-
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify'
+// useEffect
 function Home() {
-    const [name,setname]=useState('')
+    const [name,setName]=useState('')
     const [cookieVal,setCookieVal]=useState(cookies.get('email'))
+    const getUserName=async()=>{
+    //asking server to return myname:
+     await axios.post('http://localhost:2000/account',{
+        cookieVal
+        }).then(res=>{
+            if(res.data==='error'){
+                toast.error('Something Went Wrong 18')
+                setName('N/A')
+            }else{
+                setName(res.data)
+            }
+        }).catch(error => {
+            console.error(error); // Log any errors
+            setName('N/A');
+            toast.error('Something Went Wrong');
+        });
+
+    }
+    useEffect(() => {
+        getUserName();
+    }, []); // Empty dependency array means this effect runs once when the component mounts
+    
   const logout=()=>{
     //clear the cookie
         if(cookieVal!==undefined){
             setCookieVal(undefined)
             cookies.remove("email");
+            toast.success('Successfully Logged Out')
+
         }
     }
     return (

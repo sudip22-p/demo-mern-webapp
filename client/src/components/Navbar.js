@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import cookies from "js-cookie"
+import { ToastContainer, toast } from 'react-toastify'
+
 // useState
 // useEffect
 
@@ -12,11 +14,22 @@ function Navbar() {
     //     setShowMenu(!showMenu)//sets true if false and vice versa
     // }
     const [cookieVal,setCookieVal]=useState(cookies.get('email'))
+  //check the cookie is changed or not--if yes update cookie and app too
+  useEffect(()=>{
+    const interval=setInterval(()=>{
+      const updatedCookie=cookies.get('email')
+    if(updatedCookie!==cookieVal){
+      setCookieVal(updatedCookie)
+    }
+    },1000)
+    return ()=>{clearInterval(interval)}
+    
+  },[cookieVal])
   const logout=()=>{
     //clear the cookie
     if(cookieVal!==undefined){
-        setCookieVal(undefined)
         cookies.remove("email");
+        toast.success('Successfully Logged Out')
     }
   }
     return (
@@ -40,12 +53,11 @@ function Navbar() {
                     </Link>
                 </ul>
                 {
-                    cookieVal===undefined && 
+                    cookieVal===undefined ?
                     <Link to={"/login"}>
                         <button className="login font-bold bg-white py-2 px-5 rounded text-blue-500 hover:bg-blue-500 hover:text-white border-2 border-blue-500 cursor-pointer">LOGIN</button>
                     </Link>
-                }
-                {
+                    :
                     cookieVal!==undefined && 
                         <button className="login font-bold bg-white py-2 px-5 rounded text-blue-500 hover:bg-blue-500 hover:text-white border-2 border-blue-500 cursor-pointer" onClick={()=>{logout()}}>LOGOUT</button>
                 }

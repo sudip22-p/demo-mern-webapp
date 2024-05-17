@@ -20,8 +20,6 @@ function Login() {
       toast.error('Password must be atleast 6 character long')
     }
       else{
-        try{
-
           await axios.post('http://localhost:2000/login',{
             form
           }).then(res=>{
@@ -36,10 +34,10 @@ function Login() {
             }else{
               toast.error('Something Went Wrong')
             }
-          })
-        }catch(e){
-            toast.error('Something Went Wrong')
-        }
+          }).catch(error => {
+            console.error(error); 
+            toast.error('Something Went Wrong');
+        });
       }
     }catch(e){
       console.log(e);

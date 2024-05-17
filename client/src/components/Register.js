@@ -25,8 +25,6 @@ function Register() {
         toast.error('Passwords donot match')
       }
       else{
-        try{
-
           await axios.post('http://localhost:2000/register',{
             form
           }).then(res=>{
@@ -38,10 +36,10 @@ function Register() {
             }else{
             toast.error('Something Went Wrong')
           }
-        })
-      }catch(e){
-          toast.error('Something Went Wrong')
-        }
+        }).catch(error => {
+          console.error(error); 
+          toast.error('Something Went Wrong');
+      });
       }
     }catch(e){
       console.log(e);

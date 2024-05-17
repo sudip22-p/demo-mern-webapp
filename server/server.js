@@ -2,7 +2,6 @@ import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import express from 'express';
 import dotenv from 'dotenv';
-import conn from './mongo.js';
 import { Person } from './models/Person.js';
 
 // Load environment variables from .env file
@@ -95,6 +94,25 @@ app.post('/login', async (req, res) => {
     // Send failure response if any error occurs
     console.error(e);
     return res.send('fail');
+  }
+});
+// account route handler
+app.post('/account', async (req, res) => {
+  // Extract form data from request body
+  const userEmail = req.body.cookieVal;
+  try {
+    // Check if user already exists
+    const existingUser = await Person.findOne({ email: userEmail });
+    if (!existingUser) {
+       return res.send('error');
+    }
+    
+    // Send success response if password match
+    return res.send(existingUser.fullName);
+  } catch (e) {
+    // Send failure response if any error occurs
+    console.error(e);
+    return res.send('error');
   }
 });
 
