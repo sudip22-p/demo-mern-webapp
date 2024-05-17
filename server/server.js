@@ -64,7 +64,7 @@ app.post('/register', async (req, res) => {
     return res.send('success');
   } catch (e) {
     // Send failure response if any error occurs
-    console.error(e);
+    // console.error(e);
     return res.send('fail');
   }
 });
@@ -96,7 +96,7 @@ app.post('/login', async (req, res) => {
     return res.send('success');
   } catch (e) {
     // Send failure response if any error occurs
-    console.error(e);
+    // console.error(e);
     return res.send('fail');
   }
 });
@@ -115,7 +115,7 @@ app.post('/account', async (req, res) => {
     return res.send(existingUser.fullName);
   } catch (e) {
     // Send failure response if any error occurs
-    console.error(e);
+    // console.error(e);
     return res.send('error');
   }
 });
