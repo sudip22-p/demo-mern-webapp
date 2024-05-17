@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import express from 'express';
 import dotenv from 'dotenv';
 import { Person } from './models/Person.js';
+import sendMail from './controllers/sendMail.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -26,6 +27,8 @@ const port = process.env.PORT;
 app.get('/', cors(), (req, res) => {
   res.send('Hello SUDIP!');
 });
+//handling the email sending route
+app.get('/mail',sendMail)//sendMail is a controller
 
 // Registration route handler
 app.post('/register', async (req, res) => {
