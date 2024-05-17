@@ -2,6 +2,7 @@ import cors from 'cors';
 import bcrypt from 'bcryptjs';
 import express from 'express';
 import dotenv from 'dotenv';
+import conn from './mongo.js'
 import { Person } from './models/Person.js';
 import sendMail from './controllers/sendMail.js';
 
@@ -28,7 +29,7 @@ app.get('/', cors(), (req, res) => {
   res.send('Hello SUDIP!');
 });
 //handling the email sending route
-app.get('/mail',sendMail)//sendMail is a controller
+app.post('/mail',sendMail)//sendMail is a controller
 
 // Registration route handler
 app.post('/register', async (req, res) => {

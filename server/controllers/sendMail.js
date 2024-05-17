@@ -3,13 +3,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 const sendMail = async (req, res) => {
     const data = req.body.emailData;
-
-  // Create data object with required fields
-  const emailData = {
-    to: data.to,
-    subject: data.subject,
-    text: data.text
-  };
+    
+    // Create data object with required fields
+    const emailData = {
+        to: data.to,
+        subject: data.subject,
+        text: data.text
+    };
     try {
         // Create a transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({
